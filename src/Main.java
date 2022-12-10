@@ -47,14 +47,17 @@ public class Main {
 
 
         ShoppingCartList cart = new ShoppingCartList(mall.getItem("3434349") , 1);
-        cart.addItem(mall.getItem("1112356"), 2 );
         cart.addItem(mall.getItem("3333333"), 2 );
-        cart.addItem(mall.getItem("22298856"), 600 );
+        cart.addItem(mall.getItem("22298856"), 1 );
 
-        System.out.println(cart.getSize());
+        System.out.println( "the size of the cart before checking out:  " +cart.getSize());
 
+        System.out.println( "the final price is:  "+cart.checkOut());
 
-        System.out.println(cart.checkOut());
+        System.out.println( "the size of the cart after checking out:  " +cart.getSize());
+
+        System.out.println("----------------------------------------------------------------");
+
 
 
 

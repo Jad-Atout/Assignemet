@@ -98,7 +98,9 @@ public class ShoppingCartList {
             price += head.getPrice()*quantityMap.getOrDefault(head, 0);
             quantityMap.remove(head);
             head = head.next;
+
         }
+        size = 0;
         return price;
     }
 
