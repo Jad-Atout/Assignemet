@@ -2,7 +2,9 @@ public class MainLinkedList {
     private int size ;
     private StoreNode head;
     private StoreNode tail;
-    private boolean AddStore(StoreNode store){
+    public boolean AddStore(StoreLinkedList list , String ID){
+        StoreNode store = new StoreNode(list,ID);
+
         if(size == 0){
             head = store;
             tail= store;
@@ -20,12 +22,17 @@ public class MainLinkedList {
         StoreNode store = findStore(ID);
         if(store == null){
             return "The element doesn't belong to any store";
-        }else if (store.store.containsItem(ID)){
+        }else if (store.store.containsItem(ID) != null){
             return "The Item : " + name + " exists in "+ store.storeID;
 
         }else{
             return "The element is not in the store";
         }
+
+    }
+    public ItemNode getItem(String ID){
+        StoreNode store = findStore(ID);
+        return (store != null)? store.store.containsItem(ID) : null;
 
     }
     private StoreNode findStore(String ID){

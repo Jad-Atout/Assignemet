@@ -3,30 +3,47 @@ import java.util.Map;
 
 public class ShoppingCartList {
     private int size;
-    private StoreLinkedList.ItemNode head;
-    private StoreLinkedList.ItemNode tail;
-    Map<StoreLinkedList.ItemNode, Integer> quantityMap = new HashMap<>();
+    private ItemNode head;
+    private ItemNode tail;
+    private Map<ItemNode, Integer> quantityMap = new HashMap<>();
 
-    public ShoppingCartList(StoreLinkedList.ItemNode item, int quantity) {
+
+
+    public ShoppingCartList(ItemNode item, int quantity) {
         addItem(item, quantity);
 
     }
 
+    public int getSize() {
+        return size;
+    }
 
-    private void addItem (StoreLinkedList.ItemNode item , int quantity){
-        if(item.setQuantity(quantity, false)) {
-            if (size == 0) {
-                head = item;
+    public void addItem (ItemNode item , int quantity){
+        if(item == null){
+            System.out.println("Failed to add the item is not available");
+        }else {
+
+            if (item.setQuantity(quantity, false)) {
+                if (size == 0) {
+                    head = item;
+                    tail = item;
+                    size++;
+                    quantityMap.put(item, quantity);
 
 
-            } else {
-                tail.next = item;
+                } else {
+                    tail.next = item;
+                    tail = item;
+                    size++;
+                    quantityMap.put(item, quantity);
 
+                }
+
+
+
+            }else {
+                System.out.println("The Amount is not Available");
             }
-            tail = item;
-            size++;
-            quantityMap.put(item,quantity);
-
         }
 
 
@@ -34,7 +51,7 @@ public class ShoppingCartList {
 
     public void  removeItem(String ID){
 
-            StoreLinkedList.ItemNode temp = head;
+            ItemNode temp = head;
             if(size == 0){
                 return;
             }
@@ -49,7 +66,7 @@ public class ShoppingCartList {
             }
             while (temp.next != null){
                 if(temp.next.getID().equals(ID)){
-                    StoreLinkedList.ItemNode point = temp.next;
+                    ItemNode point = temp.next;
                     int returned = quantityMap.getOrDefault(point,0);
                     temp.setQuantity(returned,true);
                     temp.next = temp.next.next;
@@ -61,6 +78,19 @@ public class ShoppingCartList {
                 temp= temp.next;
             }
     }
+
+    @Override
+    public String toString() {
+        ItemNode temp = head;
+        String s = "";
+       while (temp!=null){
+           s+= temp.toString();
+           temp = temp.next;
+
+       }
+       return s;
+    }
+
     public double  checkOut(){
         double price = 0.0;
 
